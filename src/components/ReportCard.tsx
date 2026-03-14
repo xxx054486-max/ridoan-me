@@ -4,7 +4,7 @@ import { MapPin, Share2, CheckCircle, AlertTriangle, HelpCircle, MessageCircle, 
 import { collection, query, where, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Report } from "@/types";
-import { getNickname } from "@/lib/nicknames";
+
 import ImageCarousel from "@/components/ImageCarousel";
 import LinkPreview from "@/components/LinkPreview";
 import LinkifyText from "@/components/LinkifyText";
@@ -43,7 +43,7 @@ export default function ReportCard({ report, showStatus }: ReportCardProps) {
     e.stopPropagation();
     const url = `${window.location.origin}/reports/${report.id}`;
     if (navigator.share) {
-      navigator.share({ title: "দুর্নীতি রিপোর্ট", url });
+      navigator.share({ title: "Chor Koi - দুর্নীতি রিপোর্ট", url });
     } else {
       navigator.clipboard.writeText(url);
     }
@@ -76,7 +76,7 @@ export default function ReportCard({ report, showStatus }: ReportCardProps) {
           <User size={18} className="text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[13px] font-semibold">{getNickname(report.userId)}</p>
+          <p className="text-[13px] font-semibold">Anonymous</p>
           <p className="text-[11px] text-muted-foreground">{date}</p>
         </div>
         <div className="flex items-center gap-1.5">

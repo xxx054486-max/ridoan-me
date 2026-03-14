@@ -51,7 +51,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="fixed inset-0 flex flex-col bg-background">
       <header className="flex items-center justify-between px-4 h-14 bg-topbar text-topbar-foreground shrink-0 z-50 relative">
-        <h1 className="text-lg font-bold tracking-tight">Corruption Alert</h1>
+        <h1 className="text-lg font-bold tracking-tight">Chor Koi</h1>
         <div className="flex items-center gap-2">
           {/* Profile Icon with Dropdown */}
           <div ref={profileRef} className="relative">

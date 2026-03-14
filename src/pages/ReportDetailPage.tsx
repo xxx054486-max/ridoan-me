@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { doc, onSnapshot, getDoc, updateDoc, increment, setDoc, deleteDoc } from "firebase/firestore";
+import { doc, onSnapshot, updateDoc, increment } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { Report } from "@/types";
-import { getNickname } from "@/lib/nicknames";
+
 import CommentSection from "@/components/CommentSection";
 import ImageCarousel from "@/components/ImageCarousel";
 import LinkPreview from "@/components/LinkPreview";
@@ -30,29 +30,27 @@ export default function ReportDetailPage() {
     return unsub;
   }, [id]);
 
+  // Load user's vote from localStorage
   useEffect(() => {
-    if (!user || !id) return;
-    getDoc(doc(db, "votes", `${id}_${user.uid}`)).then((snap) => {
-      if (snap.exists()) setUserVote(snap.data().type);
-    });
-  }, [user, id]);
+    if (!id) return;
+    const stored = localStorage.getItem(`vote_${id}`);
+    if (stored) setUserVote(stored);
+  }, [id]);
 
   const handleVote = async (type: "true" | "suspicious" | "needEvidence") => {
-    if (!user) return toast.error("ভোট দিতে লগইন করুন");
     if (!id || voting) return;
     setVoting(true);
-    const voteRef = doc(db, "votes", `${id}_${user.uid}`);
     const reportRef = doc(db, "reports", id);
     try {
       if (userVote === type) {
-        await deleteDoc(voteRef);
         await updateDoc(reportRef, { [`votes.${type}`]: increment(-1) });
         setUserVote(null);
+        localStorage.removeItem(`vote_${id}`);
       } else {
         if (userVote) await updateDoc(reportRef, { [`votes.${userVote}`]: increment(-1) });
-        await setDoc(voteRef, { reportId: id, userId: user.uid, type });
         await updateDoc(reportRef, { [`votes.${type}`]: increment(1) });
         setUserVote(type);
+        localStorage.setItem(`vote_${id}`, type);
       }
     } catch { toast.error("ভোট দিতে সমস্যা হয়েছে"); }
     finally { setVoting(false); }
@@ -60,7 +58,7 @@ export default function ReportDetailPage() {
 
   const handleShare = () => {
     const url = window.location.href;
-    if (navigator.share) navigator.share({ title: "দুর্নীতি রিপোর্ট", url });
+    if (navigator.share) navigator.share({ title: "Chor Koi - দুর্নীতি রিপোর্ট", url });
     else { navigator.clipboard.writeText(url); toast.success("Link copied"); }
   };
 
@@ -69,12 +67,12 @@ export default function ReportDetailPage() {
 
   const date = report.createdAt?.toDate ? report.createdAt.toDate().toLocaleDateString("bn-BD") : "অজানা তারিখ";
   const approvedUpdates = (report.userUpdates || []).filter((u) => u.status === "approved");
-  const nickname = getNickname(report.userId);
+  const nickname = "Anonymous";
 
   const voteButtons = [
     { type: "true" as const, label: "সত্য", icon: CheckCircle },
-    { type: "suspicious" as const, label: "সন্দেহজনক", icon: AlertTriangle },
-    { type: "needEvidence" as const, label: "প্রমাণ চাই", icon: HelpCircle },
+    { type: "suspicious" as const, label: "ভুয়া", icon: AlertTriangle },
+    { type: "needEvidence" as const, label: "প্রমাণ প্রয়োজন", icon: HelpCircle },
   ];
 
   const allImages = [

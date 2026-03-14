@@ -127,9 +127,12 @@ export default function Index() {
         </div>
 
         {/* Today's report count */}
-        <div className="px-3 pb-2">
+        <div className="flex items-center gap-4 px-3 pb-2">
           <p className="text-[12px] font-semibold text-muted-foreground">
-            আজকের দুর্নীতি রিপোর্ট: <span className="text-primary font-bold">{todayCount}</span>
+            আজকের রিপোর্ট: <span className="text-primary font-bold">{todayCount}</span>
+          </p>
+          <p className="text-[12px] font-semibold text-muted-foreground">
+            মোট রিপোর্ট: <span className="text-primary font-bold">{reports.length}</span>
           </p>
         </div>
       </div>
