@@ -69,7 +69,7 @@ export default function ReportDetailPage() {
 
   const date = report.createdAt?.toDate ? report.createdAt.toDate().toLocaleDateString("bn-BD") : "অজানা তারিখ";
   const approvedUpdates = (report.userUpdates || []).filter((u) => u.status === "approved");
-  const nickname = getNickname(report.userId);
+  const nickname = "Anonymous";
 
   const voteButtons = [
     { type: "true" as const, label: "সত্য", icon: CheckCircle },
