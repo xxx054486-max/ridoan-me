@@ -82,7 +82,7 @@ export default function CommentSection({ reportId }: CommentSectionProps) {
     const date = comment.createdAt?.toDate
       ? comment.createdAt.toDate().toLocaleDateString("bn-BD")
       : "";
-    const nickname = getNickname(comment.userId);
+    const nickname = "Anonymous";
 
     return (
       <div key={comment.id} className={depth > 0 ? "pl-10 mt-1.5" : ""}>

@@ -76,7 +76,7 @@ export default function ReportCard({ report, showStatus }: ReportCardProps) {
           <User size={18} className="text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[13px] font-semibold">{getNickname(report.userId)}</p>
+          <p className="text-[13px] font-semibold">Anonymous</p>
           <p className="text-[11px] text-muted-foreground">{date}</p>
         </div>
         <div className="flex items-center gap-1.5">
