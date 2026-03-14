@@ -13,7 +13,7 @@ import {
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { Comment } from "@/types";
-import { getNickname } from "@/lib/nicknames";
+
 import { Send, X, User } from "lucide-react";
 import { toast } from "sonner";
 
