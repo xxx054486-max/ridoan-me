@@ -30,12 +30,12 @@ export default function ReportDetailPage() {
     return unsub;
   }, [id]);
 
+  // Load user's vote from localStorage
   useEffect(() => {
-    if (!user || !id) return;
-    getDoc(doc(db, "votes", `${id}_${user.uid}`)).then((snap) => {
-      if (snap.exists()) setUserVote(snap.data().type);
-    });
-  }, [user, id]);
+    if (!id) return;
+    const stored = localStorage.getItem(`vote_${id}`);
+    if (stored) setUserVote(stored);
+  }, [id]);
 
   const handleVote = async (type: "true" | "suspicious" | "needEvidence") => {
     if (!id || voting) return;
