@@ -4,7 +4,7 @@ import { MapPin, Share2, CheckCircle, AlertTriangle, HelpCircle, MessageCircle, 
 import { collection, query, where, getCountFromServer } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Report } from "@/types";
-import { getNickname } from "@/lib/nicknames";
+
 import ImageCarousel from "@/components/ImageCarousel";
 import LinkPreview from "@/components/LinkPreview";
 import LinkifyText from "@/components/LinkifyText";
