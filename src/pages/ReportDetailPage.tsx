@@ -71,8 +71,8 @@ export default function ReportDetailPage() {
 
   const voteButtons = [
     { type: "true" as const, label: "সত্য", icon: CheckCircle },
-    { type: "suspicious" as const, label: "সন্দেহজনক", icon: AlertTriangle },
-    { type: "needEvidence" as const, label: "প্রমাণ চাই", icon: HelpCircle },
+    { type: "suspicious" as const, label: "ভুয়া", icon: AlertTriangle },
+    { type: "needEvidence" as const, label: "প্রমাণ প্রয়োজন", icon: HelpCircle },
   ];
 
   const allImages = [
