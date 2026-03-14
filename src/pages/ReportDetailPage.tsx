@@ -40,18 +40,17 @@ export default function ReportDetailPage() {
   const handleVote = async (type: "true" | "suspicious" | "needEvidence") => {
     if (!id || voting) return;
     setVoting(true);
-    const voteRef = doc(db, "votes", `${id}_${user.uid}`);
     const reportRef = doc(db, "reports", id);
     try {
       if (userVote === type) {
-        await deleteDoc(voteRef);
         await updateDoc(reportRef, { [`votes.${type}`]: increment(-1) });
         setUserVote(null);
+        localStorage.removeItem(`vote_${id}`);
       } else {
         if (userVote) await updateDoc(reportRef, { [`votes.${userVote}`]: increment(-1) });
-        await setDoc(voteRef, { reportId: id, userId: user.uid, type });
         await updateDoc(reportRef, { [`votes.${type}`]: increment(1) });
         setUserVote(type);
+        localStorage.setItem(`vote_${id}`, type);
       }
     } catch { toast.error("ভোট দিতে সমস্যা হয়েছে"); }
     finally { setVoting(false); }
