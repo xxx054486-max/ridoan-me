@@ -38,7 +38,6 @@ export default function ReportDetailPage() {
   }, [user, id]);
 
   const handleVote = async (type: "true" | "suspicious" | "needEvidence") => {
-    if (!user) return toast.error("ভোট দিতে লগইন করুন");
     if (!id || voting) return;
     setVoting(true);
     const voteRef = doc(db, "votes", `${id}_${user.uid}`);
