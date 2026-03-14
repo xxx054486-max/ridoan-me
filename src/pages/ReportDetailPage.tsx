@@ -4,7 +4,7 @@ import { doc, onSnapshot, getDoc, updateDoc, increment, setDoc, deleteDoc } from
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/contexts/AuthContext";
 import { Report } from "@/types";
-import { getNickname } from "@/lib/nicknames";
+
 import CommentSection from "@/components/CommentSection";
 import ImageCarousel from "@/components/ImageCarousel";
 import LinkPreview from "@/components/LinkPreview";
