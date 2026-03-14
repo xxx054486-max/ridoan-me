@@ -43,7 +43,7 @@ export default function ReportCard({ report, showStatus }: ReportCardProps) {
     e.stopPropagation();
     const url = `${window.location.origin}/reports/${report.id}`;
     if (navigator.share) {
-      navigator.share({ title: "দুর্নীতি রিপোর্ট", url });
+      navigator.share({ title: "Chor Koi - দুর্নীতি রিপোর্ট", url });
     } else {
       navigator.clipboard.writeText(url);
     }

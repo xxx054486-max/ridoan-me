@@ -58,7 +58,7 @@ export default function ReportDetailPage() {
 
   const handleShare = () => {
     const url = window.location.href;
-    if (navigator.share) navigator.share({ title: "দুর্নীতি রিপোর্ট", url });
+    if (navigator.share) navigator.share({ title: "Chor Koi - দুর্নীতি রিপোর্ট", url });
     else { navigator.clipboard.writeText(url); toast.success("Link copied"); }
   };
 
